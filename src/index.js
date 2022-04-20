@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import postRoutes from './routes/posts.js';
+import userRoutes from './routes/users.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -20,7 +21,8 @@ app.get('/', (req, res) => {
 })
 
 app.use('/posts', postRoutes);
+app.use('/users', userRoutes);
 
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(port, () => console.log(`Server started on port ${port}`)))
-  .catch((error) => console.log(error.message));
+  .catch((error) => console.log(error.response.data));
